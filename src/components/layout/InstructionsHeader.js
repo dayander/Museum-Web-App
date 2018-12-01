@@ -10,7 +10,7 @@ const InstructionsHeading =() =>{
 
 
 const InstructionsParagraph = () => {
-    return <p id={'instructions-paragraph'} > There are two versions of this website. One is accessible and the other is not. Minneaplois Ski Hills is meant to be an instructional site. When the site loads the pages are not accessible. After this message ther will be buttons allowing you to toggle between the accessible and inaccessible verisons of the site.</p>
+    return <p id={'instructions-paragraph'} > There are two versions of this website. One is accessible and the other is not. Minneapolis Ski Hills is meant to be an instructional site. When the site loads the pages are not accessible. After this message ther will be buttons allowing you to toggle between the accessible and inaccessible verisons of the site.</p>
 };
 
 export const InstructionsHeader = ({filter}) =>{
