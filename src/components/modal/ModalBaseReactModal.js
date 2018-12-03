@@ -13,7 +13,34 @@ export const ModalBaseReactModal = ({filter, skiHill, onRequestClose}) => {
         opener = true;
 
 
+        if(skiHill.name === "Afton Alps"){
+            return(
+                <ReactModal  isOpen={opener} onRequestClose={onRequestClose}   shouldCloseOnEsc={true} contentLabel="Trail Map Modal" ariaHideApp={false}>
+                    <div className={'modal-wrapper'}>
+                        <div className={'modal-popover'}>
+                            <div className={'modal-heading-box'}>
+                                <h2>{skiHill.name} Trail Map</h2>
+                            </div>
 
+                            <div className={'well'}>
+                                <div className={'modal-img-wrapper'}>
+                                    <img src={skiHill.imgPath}  alt={skiHill.trailMapAlt}/>
+                                </div>
+
+                                <p>Photo Courtesy of: <a href={skiHill.imgSourceURL}>{skiHill.imgSourceURL}</a></p>
+                            </div>
+
+                            <div className={'modal-close-box'}>
+                                <ConnectedCloseModalButton {...skiHill}>
+                                    Close Trail Map
+                                </ConnectedCloseModalButton>
+                            </div>
+
+                        </div>
+                    </div>
+                </ReactModal>
+            )
+        }
 
 
         return (
@@ -26,7 +53,7 @@ export const ModalBaseReactModal = ({filter, skiHill, onRequestClose}) => {
 
                         <div className={'well'}>
                             <div className={'modal-img-wrapper'}>
-                                <img src={skiHill.imgPath}  alt={skiHill.trailMapAlt}/>
+                                <img src={skiHill.imgPath}  alt={skiHill.trailMapFullAlt}/>
                             </div>
 
                             <p>Photo Courtesy of: <a href={skiHill.imgSourceURL}>{skiHill.imgSourceURL}</a></p>
