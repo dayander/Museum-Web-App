@@ -2,9 +2,9 @@ import React from 'react';
 import ConnectedContactForms from '../containers/ConnectedContactForms';
 import {PageTitle} from '../a11y/PageTitle';
 import {PageFocus} from "../a11y/PageFocus";
-import {Header} from "../layout/Header";
+import MainNav from '../layout/mainNav';
 
-class Contact extends React.Component{
+class ContactWithErrors extends React.Component{
 
 
     componentDidMount(){
@@ -22,16 +22,14 @@ class Contact extends React.Component{
     render(){
         return(
             <div>
-               <Header/>
+                <MainNav/>
                 <main>
-
                     <h1>Contact</h1>
                     <ConnectedContactForms/>
-
                 </main>
 
             </div>
         )
     }
 }
-export default Contact;
+export default ContactWithErrors;

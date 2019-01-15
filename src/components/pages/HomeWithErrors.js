@@ -3,12 +3,12 @@ import {PageTitle} from '../a11y/PageTitle';
 import {PageFocus} from "../a11y/PageFocus";
 import SkiHillData from '../../data/SkiHillData'
 import VisibleSkiHillList from "../containers/VisibleSkiHillList";
+import MainNav from '../layout/mainNav';
 
 
 import ConnectedHeadingLevelOne from "../containers/connectedHeadingLevelOne";
-import {Header} from "../layout/Header";
 
-class Home extends React.Component{
+class HomeWithErrors extends React.Component{
 
 
 
@@ -28,22 +28,22 @@ class Home extends React.Component{
 
     render(){
 
-        return(<div>
-
-
-                <Header/>
-            <main >
+        return(
             <div>
-                
-                <ConnectedHeadingLevelOne>
-                    Twin Cities Ski Areas
-                </ConnectedHeadingLevelOne>
+                <MainNav/>
+            <main >
+                <div>
 
-                <VisibleSkiHillList skiHills={SkiHillData} />
+                    <ConnectedHeadingLevelOne>
+                        Twin Cities Ski Areas
+                    </ConnectedHeadingLevelOne>
+
+                    <VisibleSkiHillList skiHills={SkiHillData} />
 
 
-            </div>
+                </div>
             </main>
+
             </div>
 
 
@@ -59,4 +59,4 @@ class Home extends React.Component{
 
 
 
-export default Home;
+export default HomeWithErrors;
