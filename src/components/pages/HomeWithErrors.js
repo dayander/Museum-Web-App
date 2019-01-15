@@ -3,7 +3,7 @@ import {PageTitle} from '../a11y/PageTitle';
 import {PageFocus} from "../a11y/PageFocus";
 import SkiHillData from '../../data/SkiHillData'
 import VisibleSkiHillList from "../containers/VisibleSkiHillList";
-import MainNav from '../layout/mainNav';
+import MainNavWithErrors from '../layout/mainNavWithErrors';
 
 
 import ConnectedHeadingLevelOne from "../containers/connectedHeadingLevelOne";
@@ -30,7 +30,7 @@ class HomeWithErrors extends React.Component{
 
         return(
             <div>
-                <MainNav/>
+                <MainNavWithErrors/>
             <main >
                 <div>
 

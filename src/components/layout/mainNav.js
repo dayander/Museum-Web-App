@@ -12,10 +12,10 @@ class MainNav extends React.Component {
                 <div className={'container'}>
                     <ul className={'navbar-nav'}>
                         <li>
-                            <Link to='/'>Home </Link>
+                            <Link to='/mcardle/'>Home </Link>
                         </li>
                         <li>
-                            <Link to='/contact'> Contact</Link>
+                            <Link to='/mcardle/contact'> Contact</Link>
                         </li>
                     </ul>
                 </div>

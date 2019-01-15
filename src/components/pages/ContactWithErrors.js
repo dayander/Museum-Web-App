@@ -2,7 +2,7 @@ import React from 'react';
 import ConnectedContactForms from '../containers/ConnectedContactForms';
 import {PageTitle} from '../a11y/PageTitle';
 import {PageFocus} from "../a11y/PageFocus";
-import MainNav from '../layout/mainNav';
+import MainNavWithErrors from '../layout/mainNavWithErrors';
 
 class ContactWithErrors extends React.Component{
 
@@ -22,7 +22,7 @@ class ContactWithErrors extends React.Component{
     render(){
         return(
             <div>
-                <MainNav/>
+                <MainNavWithErrors/>
                 <main>
                     <h1>Contact</h1>
                     <ConnectedContactForms/>
