@@ -1,20 +1,33 @@
 import React from 'react';
 import MainNav from './mainNav';
-import {FilterButtonHolder} from './FilterButtonHolder';
-import VisibleInstructionsHeader from '../containers/VisibleInstructionsHeader';
 
-
-export const Header = () => {
+import {connect} from 'react-redux';
 
 
 
-  return(
-      <header>
-          <div id={'top-holder'} className={'fixed-top'}>
-              <VisibleInstructionsHeader/>
-              <FilterButtonHolder/>
-              <MainNav />
-          </div>
-      </header>
-  )
+
+let Header = (props) => {
+
+let nav = (<MainNav/>);
+let noNav = ('');
+
+console.log(props)
+
+    return(
+        <header>
+            <div id={'top-holder'} className={'fixed-top'}>
+
+                {props.auth.authenticated? nav: noNav}
+            </div>
+        </header>
+    )
 };
+
+
+const mapStateToProps=(state)=>({
+   auth: state.auth
+});
+
+
+
+export default connect(mapStateToProps)(Header)

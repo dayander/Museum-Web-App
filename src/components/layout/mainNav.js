@@ -7,22 +7,31 @@ class MainNav extends React.Component {
     render(){
         return(
 
-                <div>
-            <nav>
-                <div className={'container'}>
-                    <ul className={'navbar-nav'}>
-                        <li>
-                            <Link to='/mcardle/'>Home </Link>
-                        </li>
-                        <li>
-                            <Link to='/mcardle/contact'> Contact</Link>
-                        </li>
-                    </ul>
-                </div>
+            <div>
+                <nav>
+                    <div className={'container'}>
+                        <ul className={'navbar-nav'}>
+                            <li>
+                                <Link to='/'>Home </Link>
+                            </li>
+                            <li>
+                                <Link to='/rooms'>Rooms </Link>
+                            </li>
+                            <li>
+                                <Link to='/exhibits'>Exhibits </Link>
+                            </li>
 
-            </nav>
+                            <li>
+                                <Link to='/floors'>Floors </Link>
+                            </li>
 
-                </div>
+
+                        </ul>
+                    </div>
+
+                </nav>
+
+            </div>
 
         )
     }

@@ -5,15 +5,13 @@ import {Provider} from 'react-redux';
 import {applyMiddleware, createStore} from 'redux';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
-import {a11ySwitcher} from './stateControllers/reducers/index'
-import RoutesAndNav from './components/routes'
-import {ShowAllAccessibility} from './stateControllers/actions/skiHillHeadingSwitcher'
-
+import {indexReducer} from "./stateControllers/reducers";
+import Routes from "./components/routes";
 
 
 const middleware =  applyMiddleware(logger, thunk);
 
-const store = createStore(a11ySwitcher, middleware);
+const store = createStore(indexReducer, middleware);
 
 
 
@@ -21,12 +19,13 @@ const App = (
         <Provider store={store}>
                 <BrowserRouter>
 
-                    {RoutesAndNav}
+                    {Routes}
+
                 </BrowserRouter>
         </Provider>
 );
 
-ReactDOM.render(
+ReactDOM.hydrate(
     App, document.getElementById('root')
 );
 

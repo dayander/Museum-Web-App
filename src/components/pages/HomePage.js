@@ -1,16 +1,22 @@
 import React from 'react';
-import Routes from '../routes'
-import MainNav from '../layout/mainNav';
+import {requireAuth} from "../HOC/requireAuth";
+
+import {Link} from 'react-router-dom'
 
 
-export const HomePage = () =>{
+const HomePage = () =>{
     return(
         <div>
-            <MainNav />
-            {Routes}
+           why wont you work?
+            <Link to={'./hey'}>
+                hey
+            </Link>
 
         </div>
     )
-}
+};
+
+
+export default requireAuth(HomePage)
 
 

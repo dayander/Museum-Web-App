@@ -1,12 +1,12 @@
 import {combineReducers} from 'redux';
-import {SwitchSkiA11y} from './skiHillHeadingReducer'
-import {OpenAndCloseInstructions} from "./instructionsReducer";
-import {OpenAndCloseModal} from "./modalReducer";
+import {iOSAppReducer} from "./iOSAppReducer";
+import {authReducer} from "./auth";
+import {reducer as formReducer} from 'redux-form';
 
+export const indexReducer = combineReducers({
+    iOSAppReducer:iOSAppReducer,
+    auth:authReducer,
+    form: formReducer,
 
-export const a11ySwitcher = combineReducers({
-    OpenAndCloseInstructions,
-    SwitchSkiA11y,
-    OpenAndCloseModal
 
 });

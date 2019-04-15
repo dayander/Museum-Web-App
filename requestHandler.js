@@ -10,46 +10,47 @@ import {renderToString} from 'react-dom/server';
 import {StaticRouter} from 'react-router-dom';
 //import { renderToString } from 'react-router-server';
 
-import {a11ySwitcher} from './src/stateControllers/reducers/index';
+import {indexReducer} from './src/stateControllers/reducers/index';
 import Routes from './src/components/routes';
 
 function handleRender(req, res){
 
 
 
+    //axios.get('http://localhost:3090', )
+    console.log(req.path)
 
+    // STEP-1 CREATE A REDUX STORE ON THE SERVER
+    const store = createStore(indexReducer);
 
+    // STEP-2 GET INITIAL STATE FROM THE STORE
+    const initialState = JSON.stringify(store.getState()).replace(/<\/script/g, '<\\/script').replace(/<!--/g, '<\\!--');
+    // STEP-3 IMPLEMENT REACT-ROUTER ON THE SERVER TO INTERCEPT CLIENT REQUESTs AND DEFINE WHAT TO DO WITH THEM
+    const context = {};
 
-            // STEP-1 CREATE A REDUX STORE ON THE SERVER
-            const store = createStore(a11ySwitcher);
+    const reactComponent = renderToString(
+        <Provider store={store}>
+            <StaticRouter
+                location={req.url}
+                context={context}>
+                {Routes}
 
-            // STEP-2 GET INITIAL STATE FROM THE STORE
-            const initialState = JSON.stringify(store.getState()).replace(/<\/script/g, '<\\/script').replace(/<!--/g, '<\\!--');
-            // STEP-3 IMPLEMENT REACT-ROUTER ON THE SERVER TO INTERCEPT CLIENT REQUESTs AND DEFINE WHAT TO DO WITH THEM
-            const context = {};
+            </StaticRouter>
+        </Provider>
+    );
 
-            const reactComponent = renderToString(
-                <Provider store={store}>
-                    <StaticRouter
-                        location={req.url}
-                        context={context}>
-                        {Routes}
-                    </StaticRouter>
-                </Provider>
-            );
+    if (context.url) {
+        // can use the `context.status` that
+        // we added in RedirectWithStatus
+        redirect(context.status, context.url)
+    } else {
+        res.status(200).render('index', {reactComponent, initialState})
+    }
 
-            if (context.url) {
-                // can use the `context.status` that
-                // we added in RedirectWithStatus
-                redirect(context.status, context.url)
-            } else {
-                res.status(200).render('index', {reactComponent, initialState})
-            }
-
-        // })
-        // .catch(function(err){
-        //     console.log('#Initial Server-side rendering error', err);
-        // })
+    // })
+    // .catch(function(err){
+    //     console.log('#Initial Server-side rendering error', err);
+    // })
 }
 
-module.exports = handleRender
+module.exports = handleRender;
