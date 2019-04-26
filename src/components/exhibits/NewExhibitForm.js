@@ -2,29 +2,11 @@ import React from 'react'
 import { Field, reduxForm, Control} from 'redux-form'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux';
-import DropZoneField from "../imageUpload/dropzone";
-
+import {addAppSection} from "../../stateControllers/actions/dynamicForms";
 import {AddNewExhibit} from '../../stateControllers/actions/NewExhibit';
-
-
-
-const adaptFileEventToValue = delegate => e => delegate(e.target.files[0]);
-
-const FileInput = ({
-                       input: { value: omitValue, onChange, onBlur, ...inputProps },
-                       meta: omitMeta,
-                       ...props
-                   }) => {
-    return (
-        <input
-            onChange={adaptFileEventToValue(onChange)}
-            onBlur={adaptFileEventToValue(onBlur)}
-            type="file"
-            {...props.input}
-            {...props}
-        />
-    );
-};
+import {FormGroup} from 'react-bootstrap'
+import {DynamicFormBase} from '../forms/DynamicFormBase';
+import {withRouter} from 'react-router-dom';
 
 
 class NewExhibitForm extends React.Component{
@@ -33,9 +15,14 @@ class NewExhibitForm extends React.Component{
         super(props);
 
         
+    this.appSectionAdd = this.appSectionAdd.bind(this);
 
 
+    }
 
+    appSectionAdd(e){
+        e.preventDefault();
+        this.props.addAppSection(this.props.appSectionNumber)
     }
 
 
@@ -43,7 +30,7 @@ class NewExhibitForm extends React.Component{
     submitNewExhibit = values => {
 
         this.props.AddNewExhibit(values, ()=>{
-            this.props.history.push('./exhibits')
+            this.props.history.push('/exhibits')
         });
 
 
@@ -53,31 +40,45 @@ class NewExhibitForm extends React.Component{
 
     componentDidMount(){
 
+
+
+
+
     }
 
     render(){
 
-    const {handleSubmit, AddNewExhibit} = this.props;
-        //const { input: { value } } = this.props
+    const {handleSubmit, newExhibitForm, addAppSection, appSectionNumber} = this.props;
+
+
+
+        let exhibitForm = newExhibitForm.map((element, i) =>{
+
+
+            return <DynamicFormBase key={i} {...element} />
+        });
 
     return(
-        <form enctype="multipart/form-data" onSubmit={handleSubmit(this.submitNewExhibit)}>
+        <div>
+        <form encType={'multipart/form-data'} onSubmit={handleSubmit(this.submitNewExhibit)}>
 
-            <label htmlFor={'newExhibitName'}> Exhibit Name</label>
-            <Field id={'newExhibitName'} component={'input'} type={'text'} name={'newExhibitName'} />
+            {exhibitForm}
 
-            <label htmlFor={'newExhibitTitle'}> Exhibit Title</label>
-            <Field id={'newExhibitTitle'} component={'input'} type={'text'} name={'newExhibitTitle'} />
+            <FormGroup>
+                <button type={'button'} onClick={this.appSectionAdd}>Add Section</button>
+            </FormGroup>
 
-
-            <label htmlFor={'newExhibitDescription'}> Exhibit Description</label>
-            <Field id={'newExhibitDescription'} component={'input'} type={'textarea'} name={'newExhibitDescription'} />
-
-            <label htmlFor={'newExhibitImage'}> Exhibit Image</label>
-            <Field component={FileInput} id={'newExhibitImage'}   type={'file'}  name={'newExhibitImage'} accept={'.jpg, .png, .jpeg'} />
+            <FormGroup>
+                <label htmlFor={'published'}>Published: </label>
+                <Field name="published" id="published" component={'input'} type="checkbox"/>
+            </FormGroup>
 
             <button type={'submit'}>Save</button>
         </form>
+
+
+
+        </div>
     )
     }
 
@@ -90,20 +91,19 @@ NewExhibitForm = reduxForm({
 
 
 const mapStateToProps = (state) => ({
-    errorMessage: state.auth.errorMessage
+    errorMessage: state.auth.errorMessage,
+    newExhibitForm: state.dynamicForm.newExhibitForm.fields,
+    appSectionNumber: state.dynamicForm.addedSections
 });
 
 const mapActionToDispatch= (dispatch)=>{
     return bindActionCreators({
         AddNewExhibit,
+        addAppSection
     }, dispatch)
 
-}
+};
 
 
 
-
-
-
-
-export default connect(null, mapActionToDispatch)(NewExhibitForm);
+export default withRouter(connect(mapStateToProps, mapActionToDispatch)(NewExhibitForm));

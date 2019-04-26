@@ -14,6 +14,7 @@ import LoginPage from "./pages/LoginPage";
 import HeyPage from "./pages/HeyPage";
 import ExhibitPage from "./pages/ExhibitsPage";
 import AddNewExhibitPage from "./pages/AddNewExhibitPage";
+import EditExhibitPage from "./pages/EditExhibitPage";
 
 
 
@@ -42,6 +43,8 @@ const Routes = (
       <Route path='/exhibits/newexhibit' component={AddNewExhibitPage} />
       <Route path='/floors' component={HomePage} />
       <Route path='/users' component={HomePage} />
+
+      <Route path={'/editexhibit/:id'} component={EditExhibitPage} />
 
 
 

@@ -17,7 +17,7 @@ console.log(props)
         <header>
             <div id={'top-holder'} className={'fixed-top'}>
 
-                {props.auth.authenticated? nav: noNav}
+                {props.auth.authenticated? nav: nav}
             </div>
         </header>
     )
