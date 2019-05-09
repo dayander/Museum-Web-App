@@ -44,6 +44,11 @@ class EditExhibitPage extends React.Component{
         this.props.history.push('/exhibits')
     }
 
+    appSectionAdd(e){
+        e.preventDefault();
+        this.props.addAppSection(this.props.appSectionNumber)
+    }
+
 
 
 
@@ -87,10 +92,6 @@ class EditExhibitPage extends React.Component{
                     <label htmlFor={'mainImg.altText'} > Exhibit Main Image Alt-Text  </label>
                     <Field component={'input'} type={'text'} id={'mainImg.altText'} name={'mainImg.altText'} />
                 </FormGroup>
-                <FormGroup>
-                    <label htmlFor={'subHead'} > Exhibit Subheading  </label>
-                    <Field component={'input'} type={'text'} id={'subHead'} name={'subHead'} />
-                </FormGroup>
 
                 <FormGroup>
                     <label htmlFor={'published'}>Published: </label>
@@ -126,6 +127,9 @@ class EditExhibitPage extends React.Component{
                 <h2> Exhibit Sub-sections</h2>
 
                 {subSectionForms}
+                <FormGroup>
+                    <button type={'button'} onClick={this.appSectionAdd}>Add Section</button>
+                </FormGroup>
 
                 <button type={'submit'}> Update Exhibit</button>
 

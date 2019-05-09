@@ -20,7 +20,7 @@ export const updateExhibit = (exhibitID, updateData, oldData) =>{
 
         if(updateData.hasOwnProperty(key) ){
 
-            if(key==="appSections"){
+            if(key==="appSections" && updateData[key].length > 0){
 
                 const appSec = JSON.stringify(updateData[key])
 

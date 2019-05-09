@@ -1,12 +1,7 @@
 import React from 'react';
 // REACT-ROUTER
 import { Route, Switch} from 'react-router-dom';
-
-
-
-
-
-
+import RoomsPage from './pages/RoomsPage'
 import Header from './layout/Header';
 import {Footer} from "./layout/Footer";
 import HomePage from "./pages/HomePage";
@@ -15,6 +10,8 @@ import HeyPage from "./pages/HeyPage";
 import ExhibitPage from "./pages/ExhibitsPage";
 import AddNewExhibitPage from "./pages/AddNewExhibitPage";
 import EditExhibitPage from "./pages/EditExhibitPage";
+import NewRoomPage from "./pages/newRoomPage";
+import EditRoomPage from "./pages/EditRoomPage";
 
 
 
@@ -38,7 +35,11 @@ const Routes = (
       <Route path='/' exact={true}  component={HomePage} />
       <Route path='/login' component={LoginPage} />
 
-      <Route path='/rooms' component={HomePage} />
+      <Route path='/rooms' exact={true} component={RoomsPage} />
+      <Route path={'/rooms/newroom'} exact={true} component={NewRoomPage}/>
+      <Route path={'/rooms/:id'} component={EditRoomPage} />
+
+
       <Route path='/exhibits' exact={true} component={ExhibitPage} />
       <Route path='/exhibits/newexhibit' component={AddNewExhibitPage} />
       <Route path='/floors' component={HomePage} />

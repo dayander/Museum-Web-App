@@ -9,6 +9,7 @@ var path = require('path');
 var httpProxy = require('http-proxy');
 
 var requestHandler = require('./requestHandler');
+var cors = require('cors');
 
 
 
@@ -23,6 +24,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 
+
+const corsOptions = {
+    origin: "https://cloud.estimote.com"
+};
+app.use(cors(corsOptions));
+
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', "https://cloud.estimote.com");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+
+    next();
+}
+
+
+app.use(allowCrossDomain);
 
 
 
